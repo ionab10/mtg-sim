@@ -1,0 +1,549 @@
+[
+    {
+        "name": "_____ Goblin",
+        "mana_produced": [
+            "R"
+        ]
+    },
+    {
+        "name": "Abstergo Entertainment",
+        "is_land": true,
+        "mana_produced": [
+            "C"
+        ]
+    },
+    {
+        "name": "Agatha's Soul Cauldron"
+    },
+    {
+        "name": "Ancient Tomb",
+        "is_land": true,
+        "mana_produced": [
+            "C",
+            "C"
+        ]
+    },
+    {
+        "name": "Apple of Eden, Isu Relic"
+    },
+    {
+        "name": "Arcane Signet",
+        "tags": [
+            "mana"
+        ],
+        "mana_produced": [
+            "WUBRG"
+        ],
+        "cost": [
+            "2"
+        ]
+    },
+    {
+        "name": "Arid Mesa",
+        "is_land": true,
+        "mana_produced": [
+            "WR"
+        ]
+    },
+    {
+        "name": "Avarice Totem"
+    },
+    {
+        "name": "Basalt Monolith",
+        "tags": [
+            "mana"
+        ],
+        "mana_produced": [
+            "C",
+            "C",
+            "C"
+        ],
+        "cost": [
+            "3"
+        ]
+    },
+    {
+        "name": "Battlefield Forge",
+        "is_land": true,
+        "mana_produced": [
+            "WR"
+        ]
+    },
+    {
+        "name": "Candelabra of Tawnos",
+        "tags": [
+            "mana",
+            "mana_filter"
+        ]
+    },
+    {
+        "name": "Cavern of Souls",
+        "is_land": true,
+        "mana_produced": [
+            "WUBRG"
+        ]
+    },
+    {
+        "name": "Chrome Dome"
+    },
+    {
+        "name": "Chrome Mox",
+        "tags": [
+            "mana"
+        ]
+    },
+    {
+        "name": "City of Brass",
+        "is_land": true,
+        "mana_produced": [
+            "WUBRG"
+        ]
+    },
+    {
+        "name": "City of Traitors",
+        "is_land": true,
+        "mana_produced": [
+            "C",
+            "C"
+        ]
+    },
+    {
+        "name": "Clock of Omens"
+    },
+    {
+        "name": "Cogwork Assembler"
+    },
+    {
+        "name": "Command Tower",
+        "is_land": true,
+        "mana_produced": [
+            "WUBRG"
+        ]
+    },
+    {
+        "name": "Damping Sphere",
+        "tags": [
+            "stax"
+        ]
+    },
+    {
+        "name": "Deflecting Swat"
+    },
+    {
+        "name": "Delivery Moogle",
+        "tags": [
+            "tutor"
+        ]
+    },
+    {
+        "name": "Disruptor Flute"
+    },
+    {
+        "name": "Elegant Parlor",
+        "is_land": true,
+        "enters_tapped": true,
+        "mana_produced": [
+            "W",
+            "R"
+        ]
+    },
+    {
+        "name": "Emergence Zone",
+        "is_land": true,
+        "mana_produced": [
+            "C"
+        ]
+    },
+    {
+        "name": "Enlightened Tutor",
+        "tags": [
+            "tutor_to_top"
+        ],
+        "cost": [
+            "W"
+        ]
+    },
+    {
+        "name": "Esper Sentinel",
+        "tags": [
+            "draw"
+        ]
+    },
+    {
+        "name": "Ethersworn Canonist",
+        "tags": [
+            "stax"
+        ]
+    },
+    {
+        "name": "Expedition Map"
+    },
+    {
+        "name": "Flare of Duplication"
+    },
+    {
+        "name": "Flooded Strand",
+        "is_land": true,
+        "is_fetch_land": true
+    },
+    {
+        "name": "Fogwell's Gym",
+        "is_land": true,
+        "mana_produced": [
+            "R"
+        ]
+    },
+    {
+        "name": "Gamble",
+        "tags": [
+            "tutor"
+        ]
+    },
+    {
+        "name": "Gemstone Caverns",
+        "is_land": true,
+        "mana_produced": [
+            "C",
+            "WUBRG"
+        ]
+    },
+    {
+        "name": "Geth's Grimoire",
+        "tags": [
+            "draw"
+        ]
+    },
+    {
+        "name": "Goblin Engineer"
+    },
+    {
+        "name": "Goblin Welder"
+    },
+    {
+        "name": "Grafdigger's Cage",
+        "tags": [
+            "stax"
+        ]
+    },
+    {
+        "name": "Grand Abolisher",
+        "tags": [
+            "stax"
+        ]
+    },
+    {
+        "name": "Grim Monolith",
+        "tags": [
+            "mana"
+        ],
+        "mana_produced": [
+            "C",
+            "C",
+            "C"
+        ],
+        "cost": [
+            "2"
+        ]
+    },
+    {
+        "name": "Grinding Station"
+    },
+    {
+        "name": "Inventors' Fair",
+        "is_land": true,
+        "mana_produced": [
+            "C"
+        ]
+    },
+    {
+        "name": "Jeska's Will",
+        "tags": [
+            "mana"
+        ],
+        "cost": [
+            "2",
+            "R"
+        ]
+
+    },
+    {
+        "name": "Kozilek's Command"
+    },
+    {
+        "name": "Liberator, Urza's Battlethopter"
+    },
+    {
+        "name": "Lion's Eye Diamond",
+        "tags": [
+            "mana"
+        ]
+    },
+    {
+        "name": "Liquimetal Torque",
+        "tags": [
+            "mana"
+        ],
+        "mana_produced": [
+            "C"
+        ],
+        "cost": [
+            "2"
+        ]
+    },
+    {
+        "name": "Lotus Petal",
+        "tags": [
+            "mana"
+        ],
+        "mana_produced": [
+            "WUBRG"
+        ],
+        "cost": [
+            "0"
+        ]
+    },
+    {
+        "name": "Magda, Brazen Outlaw"
+    },
+    {
+        "name": "Mana Confluence",
+        "is_land": true,
+        "mana_produced": [
+            "WUBRG"
+        ]
+    },
+    {
+        "name": "Mana Vault"
+    },
+    {
+        "name": "Manifold Key"
+    },
+    {
+        "name": "Marsh Flats",
+        "is_land": true,
+        "is_fetch_land": true
+    },
+    {
+        "name": "Metalworker",
+        "tags": [
+            "mana"
+        ]
+    },
+    {
+        "name": "Mirage Mirror"
+    },
+    {
+        "name": "Mishra's Workshop",
+        "is_land": true,
+        "mana_produced": [
+            "C",
+            "C",
+            "C"
+        ]
+    },
+    {
+        "name": "Mjölnir, Hammer of Thor"
+    },
+    {
+        "name": "Moonsilver Key"
+    },
+    {
+        "name": "Mox Diamond"
+    },
+    {
+        "name": "Mox Opal"
+    },
+    {
+        "name": "Oswald Fiddlebender"
+    },
+    {
+        "name": "Plateau",
+        "is_land": true,
+        "mana_produced": [
+            "W",
+            "R"
+        ]
+    },
+    {
+        "name": "Professional Face-Breaker"
+    },
+    {
+        "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+        "name": "Ranger-Captain of Eos"
+    },
+    {
+        "name": "Reckless Handling"
+    },
+    {
+        "name": "Red Elemental Blast"
+    },
+    {
+        "name": "Redirect Lightning"
+    },
+    {
+        "name": "Remote Farm",
+        "is_land": true,
+        "mana_produced": [
+            "W",
+            "W"
+        ]
+    },
+    {
+        "name": "Reprieve"
+    },
+    {
+        "name": "Rite of Flame"
+    },
+    {
+        "name": "Sacred Foundry",
+        "is_land": true,
+        "mana_produced": [
+            "W",
+            "R"
+        ]
+    },
+    {
+        "name": "Seething Song"
+    },
+    {
+        "name": "Sevinne's Reclamation"
+    },
+    {
+        "name": "Silence"
+    },
+    {
+        "name": "Simian Spirit Guide"
+    },
+    {
+        "name": "Smothering Tithe"
+    },
+    {
+        "name": "Sol Ring"
+    },
+    {
+        "name": "Spectator Seating",
+        "is_land": true,
+        "mana_produced": [
+            "W",
+            "R"
+        ]
+    },
+    {
+        "name": "Staff of Compleation"
+    },
+    {
+        "name": "Staff of Domination"
+    },
+    {
+        "name": "Sunbaked Canyon",
+        "is_land": true,
+        "mana_produced": [
+            "C",
+            "W",
+            "R"
+        ]
+    },
+    {
+        "name": "Talon Gates of Madara",
+        "is_land": true,
+        "mana_produced": [
+            "C"
+        ]
+    },
+    {
+        "name": "Tataru Taru"
+    },
+    {
+        "name": "Tezzeret, Cruel Captain"
+    },
+    {
+        "name": "The Queen of Dale"
+    },
+    {
+        "name": "Thran Spider"
+    },
+    {
+        "name": "Touch the Spirit Realm"
+    },
+    {
+        "name": "Treasonous Ogre"
+    },
+    {
+        "name": "Treasure Vault",
+        "is_land": true,
+        "mana_produced": [
+            "C"
+        ]
+    },
+    {
+        "name": "Trouble in Pairs"
+    },
+    {
+        "name": "Underworld Breach"
+    },
+    {
+        "name": "Urza's Saga",
+        "is_land": true,
+        "mana_produced": [
+            "C"
+        ]
+    },
+    {
+        "name": "Vexing Bauble"
+    },
+    {
+        "name": "Voice of Victory"
+    },
+    {
+        "name": "Walking Ballista"
+    },
+    {
+        "name": "Wandering Archaic"
+    },
+    {
+        "name": "Windswept Heath",
+        "is_land": true,
+        "mana_produced": [
+            "WG"
+        ]
+    },
+    {
+        "name": "Word of Seizing"
+    },
+    {
+        "name": "Ancestral Hot Dog Minotaur"
+    },
+    {
+        "name": "Eldrazi Guacamole Tightrope"
+    },
+    {
+        "name": "Misunderstood Trapeze Elf"
+    },
+    {
+        "name": "Narrow-Minded Baloney Fireworks"
+    },
+    {
+        "name": "Phyrexian Midway Bamboozle"
+    },
+    {
+        "name": "Playable Delusionary Hydra"
+    },
+    {
+        "name": "Trained Blessed Mind"
+    },
+    {
+        "name": "Unassuming Gelatinous Serpent"
+    },
+    {
+        "name": "Unglued Pea-Brained Dinosaur"
+    },
+    {
+        "name": "Unsanctioned Ancient Juggler"
+    },
+    {
+        "name": "Zirda, the Dawnwaker",
+        "is_commander": true
+    }
+]
