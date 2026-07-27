@@ -55,6 +55,54 @@ def test_play_land_prefers_land_order_over_other_lands():
 	assert all(card.name != "Mishra's Workshop" for card in game.hand)
 
 
+def test_land_order_matches_expected_priority_list():
+	game = make_game()
+
+	expected_order = [
+            # 3 mana
+            "Mishra's Workshop",
+
+            # 2 mana
+            "Ancient Tomb",
+            "City of Traitors",
+
+            # fetch lands
+            "Arid Mesa",
+            "Flooded Strand",
+            "Marsh Flats",
+            "Windswept Heath",
+
+			# WUBRG
+			"Cavern of Souls",
+            "City of Brass",
+			"Command Tower",
+			"Mana Confluence",
+
+            # coloured mana
+            "Battlefield Forge",
+            "Plateau",
+            "Sacred Foundry",
+            "Spectator Seating",
+            "Sunbaked Canyon",
+
+			"Fogwell's Gym",
+
+            # tapped coloured mana,
+			"Remote Farm",
+			
+            "Elegant Parlor",
+            
+        ]
+
+
+	actual_expected_lands_in_order = [
+		land for land in game.LAND_ORDER if land in expected_order
+	]
+	print(actual_expected_lands_in_order)
+
+	assert actual_expected_lands_in_order == expected_order
+
+
 def test_first_main_phase_fetches_and_loses_life_with_arid_mesa():
 	arid_mesa = make_card("Arid Mesa", card_types=["Land"])
 	game = make_game(

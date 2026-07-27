@@ -1,0 +1,341 @@
+[
+    {
+        "name": "Abstergo Entertainment",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false,
+        "filter": {
+            "in": [
+                "1"
+            ],
+            "out": [
+                "WUBRG"
+            ]
+        }
+    },
+    {
+        "name": "Ancient Den",
+        "produces": [
+            "W"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Ancient Tomb",
+        "produces": [
+            "C",
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Arena of Glory",
+        "produces": [
+            "R"
+        ],
+        "enters_tapped": true
+    },
+    {
+        "name": "Arid Mesa",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
+        "name": "Battlefield Forge",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Cavern of Souls",
+        "produces": [
+            "CWUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "City of Brass",
+        "produces": [
+            "WUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "City of Traitors",
+        "produces": [
+            "C",
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Clifftop Retreat",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Command Tower",
+        "produces": [
+            "WUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Crystal Vein",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Elegant Parlor",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": true
+    },
+    {
+        "name": "Emergence Zone",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Exotic Orchard",
+        "produces": [
+            "WUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Flooded Strand",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
+        "name": "Fogwell's Gym",
+        "produces": [
+            "R"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Forest",
+        "produces": [
+            "G"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Gemstone Caverns",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Great Furnace",
+        "produces": [
+            "R"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Inspiring Vantage",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Inventors' Fair",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Island",
+        "produces": [
+            "U"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Mana Confluence",
+        "produces": [
+            "WUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Marsh Flats",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
+        "name": "Mishra's Workshop",
+        "produces": [
+            "C",
+            "C",
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Mountain",
+        "produces": [
+            "R"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Needleverge Pathway",
+        "produces": [
+            "R"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Plains",
+        "produces": [
+            "W"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Plateau",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Remote Farm",
+        "produces": [
+            "W",
+            "W"
+        ],
+        "enters_tapped": true
+    },
+    {
+        "name": "Rugged Prairie",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false,
+        "filter": {
+            "in": [
+                "WR"
+            ],
+            "out": [
+                "WR",
+                "WR"
+            ]
+        }
+    },
+    {
+        "name": "Sacred Foundry",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Snow-Covered Mountain",
+        "produces": [
+            "R"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Snow-Covered Plains",
+        "produces": [
+            "W"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Spectator Seating",
+        "produces": ["WR"],
+        "enters_tapped": false
+    },
+    {
+        "name": "Spire of Industry",
+        "produces": [
+            "CWUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Starting Town",
+        "produces": [
+            "CWUBRG"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Sunbaked Canyon",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Sunbillow Verge",
+        "produces": [
+            "WR"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Swamp",
+        "produces": [
+            "B"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Talon Gates of Madara",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false,
+        "filter": {
+            "in": [
+                "1"
+            ],
+            "out": [
+                "WUBRG"
+            ]
+        }
+    },
+    {
+        "name": "Treasure Vault",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Urza’s Saga",
+        "produces": [
+            "C"
+        ],
+        "enters_tapped": false
+    },
+    {
+        "name": "Windswept Heath",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    }
+]

@@ -1,3 +1,4 @@
+import json
 from random import randint, shuffle
 
 class Card:
@@ -52,6 +53,8 @@ class Game:
             self.life_total = 20
             self.seat_number = randint(1, 2)  # Random seat number for other formats
 
+        self.LANDS = json.load(open("static/lands.json", "r"))
+        self.LAND_ORDER = []
     
     @staticmethod
     def _get_available_mana(available_mana, pip=None):
@@ -138,6 +141,7 @@ class Game:
         """Count the available mana in the mana pool."""
         available_mana = self.mana_pool.copy()
         available_mana.update({
+            "CWUBRG": 0,
             "WUBRG": 0,
             "WU": 0,
             "WB": 0,
@@ -162,55 +166,11 @@ class Game:
                     else:
                         available_mana["C"] += 1
 
-                elif card.name in [
-                    "Cavern of Souls",
-                    "City of Brass",
-                    "Command Tower",
-                    "Mana Confluence",
-                ]:
-                    available_mana["WUBRG"] += 1
-
-                elif card.name == "Plains":
-                    available_mana["W"] += 1
-                elif card.name == "Island":
-                    available_mana["U"] += 1
-                elif card.name == "Swamp":
-                    available_mana["B"] += 1
-                elif card.name in ["Mountain", "Fogwell's Gym"]:
-                    available_mana["R"] += 1
-                elif card.name == "Forest":
-                    available_mana["G"] += 1
-    
-                elif card.name in [
-                    "Battlefield Forge",
-                    "Elegant Parlor",
-                    "Plateau",
-                    "Sacred Foundry",
-                    "Spectator Seating",
-                    "Sunbaked Canyon",
-                ]:
-                    available_mana["WR"] += 1
-
-                elif card.name in [
-                    "Remote Farm",
-                ]:
-                    available_mana["W"] += 2
-
-                elif card.name in [
-                    "Ancient Tomb",
-                    "City of Traitors",
-                ]:
-                    available_mana["C"] += 2
-
-                elif card.name in [
-                    "Mishra's Workshop",
-                ]:
-                    available_mana["C"] += 3
-
                 elif card.is_land():
-                    # Assuming each other land can produce one colourless mana
-                    available_mana["C"] += 1
-
+                    for land_info in self.LANDS:
+                        if card.name == land_info["name"]:
+                            for color in land_info["produces"]:
+                                available_mana[color] += 1
 
                 elif card.name in ["Chrome Mox", "Lotus Petal", "Mox Diamond"]:
                     available_mana["WUBRG"] += 1
@@ -268,19 +228,15 @@ class Game:
     ## Special Cards
 
     def play_land(self):
-
-        # todo: play lands in order of preference
-        # 1. multiple mana
-        # 2. fetch lands
-        # 3. coloured mana
-        # 4. colourless mana
-        # 5. tapped lands
-
+        self.hand.sort(key=lambda c: self.LAND_ORDER.index(c.name) if c.name in self.LAND_ORDER else len(self.LAND_ORDER))
         for card in self.hand:
-            if card.is_land():
-                self.hand.remove(card)
-                self.battlefield.append(card)
-                return card
+            self.hand.remove(card)
+            self.battlefield.append(card)
+            for land_info in self.LANDS:
+                if card.name == land_info["name"]:
+                    if land_info["enters_tapped"]:
+                        card.tap()
+            return card
 
     def play_mox(self, do_not_imprint=[]):
         """

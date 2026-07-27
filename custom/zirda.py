@@ -5,37 +5,6 @@ from game import Game
 
 class ZirdaGame(Game):
 
-    LAND_ORDER = [
-        # 3 mana
-        "Mishra's Workshop",
-
-        # 2 mana
-        "Ancient Tomb",
-        "City of Traitors",
-
-        # fetch lands
-        "Arid Mesa",
-        "Flooded Strand",
-        "Marsh Flats",
-        "Windswept Heath",
-
-        # coloured mana
-        "Battlefield Forge",
-        "Cavern of Souls",
-        "City of Brass",
-        "Command Tower",
-        "Fogwell's Gym",
-        "Mana Confluence",
-        "Plateau",
-        "Sacred Foundry",
-        "Spectator Seating",
-        "Sunbaked Canyon",
-
-        # tapped coloured mana,
-        "Elegant Parlor",
-        "Remote Farm",
-    ]
-
     INFINITE_MANA_WINCONS = [
         {"name": "Walking Ballista"},
         {"name": "Staff of Domination"},
@@ -62,11 +31,27 @@ class ZirdaGame(Game):
         {"name": "Recruiter of the Guard", "cost": ["2", "W"]}
     ]
 
+    @staticmethod
+    def _land_sort(x):
+        # calculate land order based on
+        # 1. enters untapped
+        # 2. multiple mana
+        # 3. fetch lands
+        # 4. coloured mana
+        # 5. colourless mana
+        return (
+            x["enters_tapped"],
+            -max(len(x["produces"]), 1),
+            -(1 if x.get("is_fetch", False) else 0),
+            -(len(x["produces"][0].strip("C")) if x["produces"] else 0),
+            x["name"]
+        )
+
     def __init__(self, library, commanders=[]):
         super().__init__(library, "EDH", commanders)
 
         self.mana_pool["artifact"] = 0  # Track generic mana for artifacts
-
+        self.LAND_ORDER = [land["name"] for land in sorted(self.LANDS, key=self._land_sort)]
 
     # override
     def pregame_gemstone_caverns(self):
@@ -87,21 +72,6 @@ class ZirdaGame(Game):
                     self.exile.append(c)
                     break  # Exile only one card
 
-
-    # override
-    def play_land(self):
-        for land in self.LAND_ORDER:
-            for card in self.hand:
-                if card.name == land:
-                    self.hand.remove(card)
-                    self.battlefield.append(card)
-                    return card
-        for card in self.hand:
-            if card.is_land():
-                self.hand.remove(card)
-                self.battlefield.append(card)
-                return card
-            
 
     def pay_one_generic(self, for_artifact=False):
 
