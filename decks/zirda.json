@@ -7,27 +7,30 @@
     },
     {
         "name": "Abstergo Entertainment",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C"
         ]
     },
     {
-        "name": "Agatha's Soul Cauldron"
+        "name": "Agatha's Soul Cauldron",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Ancient Tomb",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C",
             "C"
         ]
     },
     {
-        "name": "Apple of Eden, Isu Relic"
+        "name": "Apple of Eden, Isu Relic",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Arcane Signet",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ],
@@ -40,16 +43,18 @@
     },
     {
         "name": "Arid Mesa",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WR"
         ]
     },
     {
-        "name": "Avarice Totem"
+        "name": "Avarice Totem",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Basalt Monolith",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ],
@@ -64,13 +69,14 @@
     },
     {
         "name": "Battlefield Forge",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WR"
         ]
     },
     {
         "name": "Candelabra of Tawnos",
+        "card_types": ["Artifact"],
         "tags": [
             "mana",
             "mana_filter"
@@ -78,50 +84,55 @@
     },
     {
         "name": "Cavern of Souls",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WUBRG"
         ]
     },
     {
-        "name": "Chrome Dome"
+        "name": "Chrome Dome",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Chrome Mox",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ]
     },
     {
         "name": "City of Brass",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WUBRG"
         ]
     },
     {
         "name": "City of Traitors",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C",
             "C"
         ]
     },
     {
-        "name": "Clock of Omens"
+        "name": "Clock of Omens",
+        "card_types": ["Artifact"]
     },
     {
-        "name": "Cogwork Assembler"
+        "name": "Cogwork Assembler",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Command Tower",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WUBRG"
         ]
     },
     {
         "name": "Damping Sphere",
+        "card_types": ["Artifact"],
         "tags": [
             "stax"
         ]
@@ -136,11 +147,12 @@
         ]
     },
     {
-        "name": "Disruptor Flute"
+        "name": "Disruptor Flute",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Elegant Parlor",
-        "is_land": true,
+        "card_types": ["Land"],
         "enters_tapped": true,
         "mana_produced": [
             "W",
@@ -149,7 +161,7 @@
     },
     {
         "name": "Emergence Zone",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C"
         ]
@@ -165,30 +177,33 @@
     },
     {
         "name": "Esper Sentinel",
+        "card_types": ["Artifact"],
         "tags": [
             "draw"
         ]
     },
     {
         "name": "Ethersworn Canonist",
+        "card_types": ["Artifact"],
         "tags": [
             "stax"
         ]
     },
     {
-        "name": "Expedition Map"
+        "name": "Expedition Map",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Flare of Duplication"
     },
     {
         "name": "Flooded Strand",
-        "is_land": true,
+        "card_types": ["Land"],
         "is_fetch_land": true
     },
     {
         "name": "Fogwell's Gym",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "R"
         ]
@@ -201,7 +216,7 @@
     },
     {
         "name": "Gemstone Caverns",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C",
             "WUBRG"
@@ -221,6 +236,7 @@
     },
     {
         "name": "Grafdigger's Cage",
+        "card_types": ["Artifact"],
         "tags": [
             "stax"
         ]
@@ -233,6 +249,7 @@
     },
     {
         "name": "Grim Monolith",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ],
@@ -246,11 +263,12 @@
         ]
     },
     {
-        "name": "Grinding Station"
+        "name": "Grinding Station",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Inventors' Fair",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C"
         ]
@@ -270,16 +288,19 @@
         "name": "Kozilek's Command"
     },
     {
-        "name": "Liberator, Urza's Battlethopter"
+        "name": "Liberator, Urza's Battlethopter",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Lion's Eye Diamond",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ]
     },
     {
         "name": "Liquimetal Torque",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ],
@@ -292,6 +313,7 @@
     },
     {
         "name": "Lotus Petal",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ],
@@ -307,34 +329,38 @@
     },
     {
         "name": "Mana Confluence",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WUBRG"
         ]
     },
     {
-        "name": "Mana Vault"
+        "name": "Mana Vault",
+        "card_types": ["Artifact"]
     },
     {
-        "name": "Manifold Key"
+        "name": "Manifold Key",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Marsh Flats",
-        "is_land": true,
+        "card_types": ["Land"],
         "is_fetch_land": true
     },
     {
         "name": "Metalworker",
+        "card_types": ["Artifact"],
         "tags": [
             "mana"
         ]
     },
     {
-        "name": "Mirage Mirror"
+        "name": "Mirage Mirror",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Mishra's Workshop",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C",
             "C",
@@ -342,23 +368,27 @@
         ]
     },
     {
-        "name": "Mjölnir, Hammer of Thor"
+        "name": "Mjölnir, Hammer of Thor",
+        "card_types": ["Artifact"]
     },
     {
-        "name": "Moonsilver Key"
+        "name": "Moonsilver Key",
+        "card_types": ["Artifact"]
     },
     {
-        "name": "Mox Diamond"
+        "name": "Mox Diamond",
+        "card_types": ["Artifact"]
     },
     {
-        "name": "Mox Opal"
+        "name": "Mox Opal",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Oswald Fiddlebender"
     },
     {
         "name": "Plateau",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "W",
             "R"
@@ -384,7 +414,7 @@
     },
     {
         "name": "Remote Farm",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "W",
             "W"
@@ -398,7 +428,7 @@
     },
     {
         "name": "Sacred Foundry",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "W",
             "R"
@@ -420,25 +450,28 @@
         "name": "Smothering Tithe"
     },
     {
-        "name": "Sol Ring"
+        "name": "Sol Ring",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Spectator Seating",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "W",
             "R"
         ]
     },
     {
-        "name": "Staff of Compleation"
+        "name": "Staff of Compleation",
+        "card_types": ["Artifact"]
     },
     {
-        "name": "Staff of Domination"
+        "name": "Staff of Domination",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Sunbaked Canyon",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C",
             "W",
@@ -447,7 +480,7 @@
     },
     {
         "name": "Talon Gates of Madara",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C"
         ]
@@ -462,7 +495,8 @@
         "name": "The Queen of Dale"
     },
     {
-        "name": "Thran Spider"
+        "name": "Thran Spider",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Touch the Spirit Realm"
@@ -472,7 +506,7 @@
     },
     {
         "name": "Treasure Vault",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C"
         ]
@@ -485,62 +519,31 @@
     },
     {
         "name": "Urza's Saga",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "C"
         ]
     },
     {
-        "name": "Vexing Bauble"
+        "name": "Vexing Bauble",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Voice of Victory"
     },
     {
-        "name": "Walking Ballista"
+        "name": "Walking Ballista",
+        "card_types": ["Artifact"]
     },
     {
         "name": "Wandering Archaic"
     },
     {
         "name": "Windswept Heath",
-        "is_land": true,
+        "card_types": ["Land"],
         "mana_produced": [
             "WG"
         ]
-    },
-    {
-        "name": "Word of Seizing"
-    },
-    {
-        "name": "Ancestral Hot Dog Minotaur"
-    },
-    {
-        "name": "Eldrazi Guacamole Tightrope"
-    },
-    {
-        "name": "Misunderstood Trapeze Elf"
-    },
-    {
-        "name": "Narrow-Minded Baloney Fireworks"
-    },
-    {
-        "name": "Phyrexian Midway Bamboozle"
-    },
-    {
-        "name": "Playable Delusionary Hydra"
-    },
-    {
-        "name": "Trained Blessed Mind"
-    },
-    {
-        "name": "Unassuming Gelatinous Serpent"
-    },
-    {
-        "name": "Unglued Pea-Brained Dinosaur"
-    },
-    {
-        "name": "Unsanctioned Ancient Juggler"
     },
     {
         "name": "Zirda, the Dawnwaker",
