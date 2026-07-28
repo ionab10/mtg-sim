@@ -1,5 +1,3 @@
-import warnings
-
 from game import Game
 
 
@@ -53,25 +51,7 @@ class ZirdaGame(Game):
         self.mana_pool["artifact"] = 0  # Track generic mana for artifacts
         self.LAND_ORDER = [land["name"] for land in sorted(self.LANDS, key=self._land_sort)]
 
-    # override
-    def pregame_gemstone_caverns(self):
-        """Handle pregame actions."""
-
-        # Gemstone Caverns
-        for card in self.hand:
-            if card.name == "Gemstone Caverns" and self.seat_number != 1:
-                self.hand.remove(card)
-                self.battlefield.append(card)
-                card.counters["luck"] += 1  # Add a luck counter to Gemstone Caverns
-
-                # must exile a card from hand to play Gemstone Caverns
-                for c in self.hand:
-                    if c.name in ["Grim Monolith", "Basalt Monolith"] or c.name in [wincon["name"] for wincon in self.INFINITE_MANA_WINCONS]:
-                        continue  # Skip these cards
-                    self.hand.remove(c)
-                    self.exile.append(c)
-                    break  # Exile only one card
-
+        self.DO_NOT_PITCH = ["Grim Monolith", "Basalt Monolith"] #+ [wincon["name"] for wincon in self.INFINITE_MANA_WINCONS]
 
     def pay_one_generic(self, for_artifact=False):
 
@@ -129,7 +109,7 @@ class ZirdaGame(Game):
                 self.sacrifice(card)
                 tutored = self.tutor(["Plateau", "Sacred Foundry", "Elegant Parlor"], to_battlefield=True)
                 if not tutored:
-                    warnings.warn(f"Failed to tutor a land for {card.name}.")
+                    print(f"Warning: Failed to tutor a land for {card.name}.")
                 self.shuffle()
 
         self.play_mox()
