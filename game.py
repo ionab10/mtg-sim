@@ -52,9 +52,13 @@ class Game:
         else:
             self.life_total = 20
             self.seat_number = randint(1, 2)  # Random seat number for other formats
+        self.turn_number = 0
 
         self.LANDS = json.load(open("static/lands.json", "r"))
         self.LAND_ORDER = []
+
+        # Cards that should not be pitched to exile for effects such as Chrome Mox or Gemstone Caverns
+        self.DO_NOT_PITCH = []
     
     @staticmethod
     def _get_available_mana(available_mana, pip=None):
@@ -66,6 +70,8 @@ class Game:
                 total += n
 
         return total
+    
+    ## Game Actions
 
     def shuffle(self):
         """Shuffle the library of cards."""
@@ -80,33 +86,28 @@ class Game:
         else:
             raise ValueError("No more cards in the library to draw.")
         
-    def end_step(self):
-        """Handle end step actions."""
-        # reset mana pool
-        for c in self.mana_pool:
-            self.mana_pool[c] = 0
+    def pitch(self, require_nonland=False, require_nonartifact=False, exclude=[]):
+        """Pitch a card from the hand to exile.
 
-    def pregame_gemstone_caverns(self):
-        for card in self.hand:
-            if card.name == "Gemstone Caverns" and self.seat_number != 1:
-                self.hand.remove(card)
-                self.battlefield.append(card)
-                card.counters["luck"] += 1  # Add a luck counter to Gemstone Caverns
-
-                # must exile a card from hand to play Gemstone Caverns
-                for c in self.hand:
-                    self.hand.remove(c)
-                    self.exile.append(c)
-                    return  # Exile only one card
-
+        e.g. for Chrome Mox, Gemstone Caverns, etc
         
-    def pregame(self):
-        """Handle pregame actions."""
+        """
+        for card in self.hand:
 
-        # Gemstone Caverns
-        self.pregame_gemstone_caverns()
+            if card.name in exclude:
+                continue
 
+            if require_nonland and card.is_land():
+                continue
 
+            if require_nonartifact and card.is_artifact():
+                continue
+
+            self.hand.remove(card)
+            self.exile.append(card)
+            return card
+        raise ValueError("No valid cards to pitch.")
+        
     def sacrifice(self, card):
         """Sacrifice a card from the battlefield."""
         if card in self.battlefield:
@@ -128,6 +129,32 @@ class Game:
                         self.hand.append(card)
                     return card
         return None  # If no target card was found
+        
+    ### Phases
+
+    def pregame(self):
+        """Handle pregame actions."""
+
+        # Gemstone Caverns
+        self.pregame_gemstone_caverns()
+
+    def start_turn(self):
+        self.turn_number += 1
+        
+    def untap(self):
+        """Untap all cards on the battlefield."""
+        for card in self.battlefield:
+            if card.name == "Mana Vault" and card.is_tapped:
+                self.life_total -= 1
+
+            # Skip cards that should not be untapped
+            if card.name in [
+                "Basalt Monolith",
+                "Grim Monolith",
+                "Mana Vault",
+            ]:
+                continue  
+            card.untap()
 
     def first_main_phase(self):
         """Simulate the first main phase of the game."""
@@ -136,6 +163,19 @@ class Game:
         
         self.play_mox()
 
+
+    def end_step(self):
+        """Handle end step actions."""
+        # reset mana pool
+        for c in self.mana_pool:
+            self.mana_pool[c] = 0
+
+    def opponent_turn(self):
+        # this is where you might simulate Rhystic Study or Esper Sentinel draws
+        pass
+        
+
+    ## Helper Functions
 
     def count_available_mana(self):
         """Count the available mana in the mana pool."""
@@ -209,21 +249,6 @@ class Game:
 
         return available_mana
 
-    def untap(self):
-        """Untap all cards on the battlefield."""
-        for card in self.battlefield:
-            if card.name == "Mana Vault" and card.is_tapped:
-                self.life_total -= 1
-
-            # Skip cards that should not be untapped
-            if card.name in [
-                "Basalt Monolith",
-                "Grim Monolith",
-                "Mana Vault",
-            ]:
-                continue  
-            card.untap()
-
 
     ## Special Cards
 
@@ -236,7 +261,14 @@ class Game:
                 if card.name == land_info["name"]:
                     if land_info["enters_tapped"]:
                         card.tap()
+
+            # check for City of Traitors and sacrifice it because you played another land
+            for c in self.battlefield:
+                if c.name == "City of Traitors":
+                    self.sacrifice(c)
+
             return card
+        
 
     def play_mox(self, do_not_imprint=[]):
         """
@@ -268,15 +300,39 @@ class Game:
 
             # chrome mox
             elif card.name == "Chrome Mox" and any((not c.is_land() and not c.is_artifact()) for c in self.hand):
-                self.hand.remove(card)
-                self.battlefield.append(card)
-                for c in self.hand:
-                    if not c.is_land() and not c.is_artifact():
-                        self.hand.remove(c)
-                        self.exile.append(c)
-                        break  # discard only one non-land, non-artifact
+                
+                try:
+                    self.pitch(
+                        require_nonland=True,
+                        require_nonartifact=True,
+                        exclude=do_not_imprint + self.DO_NOT_PITCH
+                    )
+
+                    self.hand.remove(card)
+                    self.battlefield.append(card)
+                except ValueError:
+                    # No valid cards to imprint, skip playing Chrome Mox
+                    continue
 
             # todo: Lion's Eye Diamond
+
+    def pregame_gemstone_caverns(self, exclude=[]):
+        if self.seat_number == 1:
+            return  # Gemstone Caverns can only be played if you are not the first player
+        
+        for card in self.hand:
+            if card.name == "Gemstone Caverns":
+
+                try:
+                    self.pitch(exclude=["Gemstone Caverns"] + exclude + self.DO_NOT_PITCH)
+                    self.hand.remove(card)
+                    self.battlefield.append(card)
+                    card.counters["luck"] += 1  # Add a luck counter to Gemstone Caverns
+                    return
+
+                except ValueError:
+                    # No valid cards to pitch, skip playing Gemstone Caverns
+                    continue
 
     # Check if the game state meets the success criteria
     def check_success(self):

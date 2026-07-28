@@ -71,8 +71,10 @@ def simulate(deck_data, iterations=1, turns=0, gameplay_logic=None):
         game.pregame()
 
         # Take turns
-        for t in range(turns):
-            logger.debug("Begin turn %d", t+1)
+        for _ in range(turns):
+            game.start_turn()
+            logger.debug("Begin turn %d", game.turn_number)
+            
             game.untap()
             game.draw()
             game.first_main_phase()
@@ -80,7 +82,7 @@ def simulate(deck_data, iterations=1, turns=0, gameplay_logic=None):
             is_success = game.check_success()
             if is_success:
                 successes += 1
-                logger.debug("Success on turn %d", t+1)
+                logger.debug("Success on turn %d", game.turn_number)
                 file_logger.debug("Hand: %s", ", ".join(card.name for card in game.hand))
                 file_logger.debug("Battlefield: %s", ", ".join(card.name for card in game.battlefield))
                 break
