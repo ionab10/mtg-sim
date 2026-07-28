@@ -116,16 +116,25 @@ class Game:
         else:
             raise ValueError(f"{card.name} is not on the battlefield.")
 
-    def tutor(self, target_cards, to_battlefield=False):
+    def tutor(self, target_cards, destination="hand"):
         """Tutor a card from the library to the hand or battlefield."""
+
+        if destination not in ["hand", "battlefield", "graveyard", "top_of_library", "bottom_of_library"]:
+            raise ValueError(f"Invalid destination: {destination}")
 
         for target_card in target_cards:
             for card in self.library:
                 if card.name == target_card:
                     self.library.remove(card)
-                    if to_battlefield:
+                    if destination == "battlefield":
                         self.battlefield.append(card)
-                    else:
+                    elif destination == "graveyard":
+                        self.graveyard.append(card)
+                    elif destination == "top_of_library":
+                        self.library.append(card)
+                    elif destination == "bottom_of_library":
+                        self.library.insert(0, card)
+                    else:  # destination == "hand"
                         self.hand.append(card)
                     return card
         return None  # If no target card was found

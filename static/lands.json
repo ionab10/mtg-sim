@@ -265,7 +265,9 @@
     },
     {
         "name": "Spectator Seating",
-        "produces": ["WR"],
+        "produces": [
+            "WR"
+        ],
         "enters_tapped": false
     },
     {

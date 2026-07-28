@@ -66,3 +66,15 @@ def test_count_available_mana_includes_gemstone_luck_and_spirit_guide():
 	assert available["WUBRG"] == 2  # Gemstone + Lotus Petal
 	assert available["R"] == 1  # Spirit Guide
 	assert available["C"] == 3  # pool(1) + Ancient Tomb(2)
+
+
+def test_tutor_to_top_of_library_places_card_as_next_draw():
+	target = make_card("Pyretic Ritual")
+	other = make_card("Mountain", card_types=["Land"])
+	game = make_game(library=[target, other])
+
+	tutored = game.tutor(["Pyretic Ritual"], destination="top_of_library")
+
+	assert tutored is target
+	assert game.library[-1] is target
+	assert game.draw() is target

@@ -107,7 +107,7 @@ class ZirdaGame(Game):
                 card.tap()
                 self.life_total -= 1
                 self.sacrifice(card)
-                tutored = self.tutor(["Plateau", "Sacred Foundry", "Elegant Parlor"], to_battlefield=True)
+                tutored = self.tutor(["Plateau", "Sacred Foundry", "Elegant Parlor"], destination="battlefield")
                 if not tutored:
                     print(f"Warning: Failed to tutor a land for {card.name}.")
                 self.shuffle()
