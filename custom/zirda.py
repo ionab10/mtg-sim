@@ -94,23 +94,7 @@ class ZirdaGame(Game):
     def first_main_phase(self):
 
         # play land
-        self.play_land()
-
-        # fetch lands    
-        for card in self.battlefield:
-            if card.name in [
-                "Arid Mesa",
-                "Flooded Strand",
-                "Marsh Flats",
-                "Windswept Heath",
-            ]:
-                card.tap()
-                self.life_total -= 1
-                self.sacrifice(card)
-                tutored = self.tutor(["Plateau", "Sacred Foundry", "Elegant Parlor"], destination="battlefield")
-                if not tutored:
-                    print(f"Warning: Failed to tutor a land for {card.name}.")
-                self.shuffle()
+        self.play_land(fetch_targets=["Plateau", "Sacred Foundry", "Elegant Parlor"])
 
         self.play_mox()
 

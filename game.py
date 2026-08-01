@@ -1,5 +1,9 @@
 import json
+import logging
 from random import randint, shuffle
+
+
+logger = logging.getLogger(__name__)
 
 class Card:
 
@@ -71,6 +75,13 @@ class Game:
 
         return total
     
+    def _get_land_info(self, land_name):
+        """Get the land info from the LANDS list."""
+        for land_info in self.LANDS:
+            if land_info["name"] == land_name:
+                return land_info
+        return None
+    
     ## Game Actions
 
     def shuffle(self):
@@ -116,8 +127,13 @@ class Game:
         else:
             raise ValueError(f"{card.name} is not on the battlefield.")
 
-    def tutor(self, target_cards, destination="hand"):
-        """Tutor a card from the library to the hand or battlefield."""
+    def tutor(self, target_cards, destination="hand", shuffle=True):
+        """Tutor a card from the library to the hand or battlefield.
+
+        target_cards: list of card names to tutor (in order of priority)
+        destination: where to put the tutored card ("hand", "battlefield", "graveyard", "top_of_library", "bottom_of_library")
+        shuffle: whether to shuffle the library after tutoring (default: True)
+        """
 
         if destination not in ["hand", "battlefield", "graveyard", "top_of_library", "bottom_of_library"]:
             raise ValueError(f"Invalid destination: {destination}")
@@ -126,6 +142,9 @@ class Game:
             for card in self.library:
                 if card.name == target_card:
                     self.library.remove(card)
+                    if shuffle:
+                        self.shuffle()
+
                     if destination == "battlefield":
                         self.battlefield.append(card)
                     elif destination == "graveyard":
@@ -261,22 +280,48 @@ class Game:
 
     ## Special Cards
 
-    def play_land(self):
+    def play_land(self, fetch=True, fetch_targets=[]):
+        """
+        Play a land from the hand to the battlefield.
+        fetch: if True and land is a fetch land, activate the fetch ability to get a land from the library to the battlefield.
+        fetch_targets: list of land names to fetch if fetch is True
+        """
+
         self.hand.sort(key=lambda c: self.LAND_ORDER.index(c.name) if c.name in self.LAND_ORDER else len(self.LAND_ORDER))
         for card in self.hand:
+            if not card.is_land():
+                continue
+
+            land_info = self._get_land_info(card.name)
+            if not land_info:
+                raise ValueError(f"Land info for {card.name} not found in LANDS.")
+
             self.hand.remove(card)
             self.battlefield.append(card)
-            for land_info in self.LANDS:
-                if card.name == land_info["name"]:
-                    if land_info["enters_tapped"]:
-                        card.tap()
+            if land_info.get("enters_tapped", False):
+                card.tap()
 
             # check for City of Traitors and sacrifice it because you played another land
             for c in self.battlefield:
                 if c.name == "City of Traitors":
                     self.sacrifice(c)
 
+            if land_info.get("is_fetch", False) and fetch:
+                if not fetch_targets:
+                    raise ValueError("Fetch land played but no fetch targets provided.")
+                # Fetch a land from the library to the battlefield
+                card.tap()
+                self.life_total -= 1
+                self.sacrifice(card)
+                fetched_card = self.tutor(fetch_targets, destination="battlefield")
+                if fetched_card:
+                    break  # Fetch only one land
+                else:
+                    logger.warning("Failed to fetch a land for %s.", card.name)
+
             return card
+        
+        logger.warning("No land cards in hand to play.")
         
 
     def play_mox(self, do_not_imprint=[]):
