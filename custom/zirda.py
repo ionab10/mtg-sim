@@ -29,6 +29,31 @@ class ZirdaGame(Game):
         {"name": "Recruiter of the Guard", "cost": ["2", "W"]}
     ]
 
+    FAST_MANA_CARDS = [
+        "Chrome Mox",
+        "Lion's Eye Diamond",
+        "Lotus Petal",
+        "Mox Diamond",
+        "Mox Opal",
+        "Simian Spirit Guide",
+        "Mana Vault",
+        "Ragavan, Nimble Pilferer",
+        "Rite of Flame",
+        "Sol Ring",
+        "Arcane Signet",
+        "Desperate Ritual",
+        "Gleaming Splendor",
+        "Pyretic Ritual",
+        "Grim Monolith",
+        "Talisman of Conviction",
+        "_____ Goblin",
+        "Jeska's Will",
+        "Seething Song",
+        "Staff of Compleation",
+        "Treasonous Ogre",
+    ]
+
+
     @staticmethod
     def _land_sort(x):
         # calculate land order based on
@@ -45,13 +70,31 @@ class ZirdaGame(Game):
             x["name"]
         )
 
-    def __init__(self, library, commanders=[]):
-        super().__init__(library, "EDH", commanders)
+    def __init__(self, game_format, deck, commanders=[]):
+        super().__init__(game_format, deck, commanders)
 
         self.mana_pool["artifact"] = 0  # Track generic mana for artifacts
         self.LAND_ORDER = [land["name"] for land in sorted(self.LANDS, key=self._land_sort)]
 
         self.DO_NOT_PITCH = ["Grim Monolith", "Basalt Monolith"] #+ [wincon["name"] for wincon in self.INFINITE_MANA_WINCONS]
+
+    def _is_keepable_hand(self, hand):
+        land_count = sum(1 for card in hand if card.is_land())
+        if land_count < 1:
+            return False
+        for card in hand:
+            if card.name in self.DO_NOT_PITCH:
+                return True
+        # if hand contains fast mana and 1 outlet
+        if any(card.name in self.FAST_MANA_CARDS for card in hand) and any(card.name in self.INFINITE_MANA_WINCONS for card in hand):
+            return True
+        # if hand contains 2 lands and 1 outlet or 1 fast mana
+        if (
+            land_count >= 2
+            and (any(card.name in self.INFINITE_MANA_WINCONS for card in hand) or any(card.name in self.FAST_MANA_CARDS for card in hand))
+        ):
+            return True
+        return False
 
     def pay_one_generic(self, for_artifact=False):
 

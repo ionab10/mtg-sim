@@ -44,7 +44,7 @@ def resolve_game_class(gameplay_logic: str):
     return game_cls
 
 
-def simulate(deck_data, iterations=1, turns=0, gameplay_logic=None):
+def simulate(game_format, deck_data, iterations=1, turns=0, gameplay_logic=None, max_mulligans=2):
 
     library = [
         Card(c["name"], c.get("card_types", []))
@@ -57,15 +57,17 @@ def simulate(deck_data, iterations=1, turns=0, gameplay_logic=None):
     successes = 0
     
     for _ in range(iterations):
-        game = game_cls(library.copy(), commanders.copy())
+        game = game_cls(game_format, library.copy(), commanders=commanders.copy())
 
         # Shuffle the library
         game.shuffle()
 
         # Draw 7 cards
-        for _ in range(7):  
-            game.draw()
+        game.draw(num_cards=7)
         logger.debug("Hand after drawing 7 cards: \n%s", "\n".join(str(card) for card in game.hand))
+
+        # Handle mulligan
+        game.mulligan(max_mulligans=max_mulligans)
 
         # Handle pregame actions (like Gemstone Caverns)
         game.pregame()
@@ -96,7 +98,7 @@ def main():
         description="Simulates a MTG game"
     )
 
-
+    parser.add_argument("-f", "--game-format", type=str, default="EDH", help="game format (e.g. EDH, Modern, etc.)")
     parser.add_argument("-d", "--deck", type=str, help="Path to the deck input file")
     parser.add_argument("-i", "--iter", type=int, default=1, help="Number of games to simulate.")
     parser.add_argument("-t", "--turns", type=int, default=1, help="Number of turns to simulate. Exits early if success criteria is met.")
@@ -104,6 +106,9 @@ def main():
         "-g", "--gameplay",
         type=str,
         help="Game class or import path, e.g. ZirdaGame or custom.zirda.ZirdaGame. If not provided, defaults to the base Game class."
+    )
+    parser.add_argument(
+        "-m", "--max-mulligans", type=int, default=2, help="Maximum number of mulligans allowed. Defaults to 2."
     )
 
     args = parser.parse_args()
@@ -113,7 +118,7 @@ def main():
 
     deck_data = load_deck_from_json(args.deck)
 
-    simulate(deck_data, args.iter, args.turns, args.gameplay)
+    simulate(args.game_format, deck_data, args.iter, args.turns, args.gameplay, args.max_mulligans)
 
 if __name__ == "__main__":
     main()

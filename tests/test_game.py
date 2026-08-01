@@ -6,7 +6,8 @@ def make_card(name: str, card_types: list[str] = None) -> Card:
 
 
 def make_game(*, hand=None, library=None, battlefield=None, mana_pool=None) -> Game:
-	game = Game(library or [], format="EDH")
+	game = Game("EDH", deck=[make_card("Placeholder") for _ in range(100)])
+	game.library = library or []
 	game.hand = hand or []
 	game.battlefield = battlefield or []
 	if mana_pool is not None:
@@ -16,16 +17,17 @@ def make_game(*, hand=None, library=None, battlefield=None, mana_pool=None) -> G
 
 def test_pregame_gemstone_caverns_moves_to_battlefield_and_gets_luck_if_not_first_seat():
 	gemstone = Card("Gemstone Caverns", card_types=["Land"])
-	game = Game(library=[], format="EDH")
-	game.hand = [
-		gemstone,
-		Card("Mountain", card_types=["Land"]),
-		Card("Mountain", card_types=["Land"]),
-		Card("Mountain", card_types=["Land"]),
-		Card("Mountain", card_types=["Land"]),
-		Card("Mountain", card_types=["Land"]),
-		Card("Mountain", card_types=["Land"]),
-	]
+	game = make_game(
+		hand = [
+			gemstone,
+			Card("Mountain", card_types=["Land"]),
+			Card("Mountain", card_types=["Land"]),
+			Card("Mountain", card_types=["Land"]),
+			Card("Mountain", card_types=["Land"]),
+			Card("Mountain", card_types=["Land"]),
+			Card("Mountain", card_types=["Land"]),
+		]
+	)
 	game.seat_number = 2
 
 	game.pregame()
@@ -77,4 +79,17 @@ def test_tutor_to_top_of_library_places_card_as_next_draw():
 
 	assert tutored is target
 	assert game.library[-1] is target
-	assert game.draw() is target
+	assert game.draw()[0] is target
+
+
+def test_mulligans_when_hand_is_unkeepable():
+	opening_hand = [make_card(f"Opening {i}") for i in range(7)]
+	library = [make_card(f"Library {i}") for i in range(14)]
+
+	game = make_game(hand=opening_hand, library=library)
+	game._is_keepable_hand = lambda hand: False
+
+	game.mulligan(max_mulligans=2)
+
+	assert len(game.hand) == 6
+	assert len(game.library) == 15
