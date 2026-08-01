@@ -50,6 +50,12 @@
         "enters_tapped": false
     },
     {
+        "name": "Bloodstained Mire",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
         "name": "Cavern of Souls",
         "produces": [
             "CWUBRG"
@@ -182,6 +188,12 @@
         "is_fetch": true
     },
     {
+        "name": "Misty Rainforest",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
         "name": "Mishra's Workshop",
         "produces": [
             "C",
@@ -219,6 +231,12 @@
         "enters_tapped": false
     },
     {
+        "name": "Polluted Delta",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
         "name": "Remote Farm",
         "produces": [
             "W",
@@ -248,6 +266,12 @@
             "WR"
         ],
         "enters_tapped": false
+    },
+    {
+        "name": "Scalding Tarn",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
     },
     {
         "name": "Snow-Covered Mountain",
@@ -328,14 +352,26 @@
         "enters_tapped": false
     },
     {
-        "name": "Urza’s Saga",
+        "name": "Urza's Saga",
         "produces": [
             "C"
         ],
         "enters_tapped": false
     },
     {
+        "name": "Verdant Catacombs",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
         "name": "Windswept Heath",
+        "produces": [],
+        "enters_tapped": false,
+        "is_fetch": true
+    },
+    {
+        "name": "Wooded Foothills",
         "produces": [],
         "enters_tapped": false,
         "is_fetch": true
