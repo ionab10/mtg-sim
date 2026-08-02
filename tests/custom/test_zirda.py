@@ -7,12 +7,28 @@ def make_card(name: str, card_types: list[str] = None) -> Card:
 
 
 def make_game(*, hand=None, library=None, battlefield=None, mana_pool=None) -> ZirdaGame:
-	game = ZirdaGame(library or [])
+	game = ZirdaGame("EDH", deck=[make_card("Placeholder") for _ in range(100)])
 	game.hand = hand or []
+	game.library = library or []
 	game.battlefield = battlefield or []
 	if mana_pool is not None:
 		game.mana_pool = mana_pool
 	return game
+
+
+def test_is_keepable_hand_with_grim_monolith_and_one_land():
+	game = make_game()
+	hand = [
+		make_card("Grim Monolith", card_types=["Artifact"]),
+		make_card("Mountain", card_types=["Land"]),
+		make_card("Sol Ring", card_types=["Artifact"]),
+		make_card("Mana Vault", card_types=["Artifact"]),
+		make_card("Walking Ballista", card_types=["Artifact"]),
+		make_card("Chrome Mox", card_types=["Artifact"]),
+		make_card("Lotus Petal", card_types=["Artifact"]),
+	]
+
+	assert game._is_keepable_hand(hand) is True
 
 def test_pregame_gemstone_caverns_does_not_pitch_monolith():
 	gemstone = Card("Gemstone Caverns", card_types=["Land"])

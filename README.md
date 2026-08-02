@@ -56,6 +56,6 @@ Assuming Python is installed and requirements.txt...
 
 From root, run 
 
-`python run.py -d ./decks/<your_deck>.json -i <n_iterations> -t <n_turns> -g <custom_gameplay_module>`
+`python run.py -f EDH -d ./decks/<your_deck>.json -i <n_iterations> -t <n_turns> -g <custom_gameplay_module> -m <max_mulligans>`
 
-For example, `python run.py -d ./decks/zirda.json -i 10000 -t 2 -g custom.zirda.ZirdaGame`
+For example, `python run.py -d ./decks/zirda.json -i 10000 -t 2 -g custom.zirda.ZirdaGame -m 2` 

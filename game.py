@@ -35,8 +35,13 @@ class Card:
 
 
 class Game:
-    def __init__(self, library, format, commanders=[]):
-        self.library = library
+    def __init__(self, game_format, deck, commanders=[]):
+
+        if game_format == "EDH" and len(commanders + deck) != 100:
+            raise ValueError("EDH format requires a 100-card deck including the commander(s).")
+        
+        self.format = game_format
+        self.library = deck
         self.hand = []
         self.graveyard = []
         self.exile = []
@@ -50,7 +55,7 @@ class Game:
             "C": 0,
         }
         self.battlefield = []
-        if format == "EDH":
+        if self.format == "EDH":
             self.life_total = 40
             self.seat_number = randint(1, 4)  # Random seat number for EDH format
         else:
@@ -75,6 +80,11 @@ class Game:
 
         return total
     
+    def _is_keepable_hand(self, hand):
+        """Determine if a hand is keepable."""
+        land_count = sum(1 for card in hand if card.is_land())
+        return land_count >= 2
+    
     def _get_land_info(self, land_name):
         """Get the land info from the LANDS list."""
         for land_info in self.LANDS:
@@ -88,21 +98,62 @@ class Game:
         """Shuffle the library of cards."""
         shuffle(self.library)
 
-    def draw(self):
-        """Draw a card from the library."""
-        if self.library:
-            card = self.library.pop()
-            self.hand.append(card)
-            return card
+    def discard(self, card):
+        """Discard a card from the hand to the graveyard."""
+        if card in self.hand:
+            self.hand.remove(card)
+            self.graveyard.append(card)
         else:
-            raise ValueError("No more cards in the library to draw.")
+            raise ValueError(f"{card.name} is not in hand and cannot be discarded.")
+
+    def draw(self, num_cards=1):
+        """Draw a card from the library."""
+        drawn_cards = []
+        for _ in range(num_cards):
+            if self.library:
+                card = self.library.pop()
+                self.hand.append(card)
+                drawn_cards.append(card)
+            else:
+                raise ValueError("No more cards in the library to draw.")
+        return drawn_cards
         
-    def pitch(self, require_nonland=False, require_nonartifact=False, exclude=[]):
+    def mulligan(self, max_mulligans=2):
+        """Mulligan the hand."""
+        for i in range(max_mulligans):
+            if self._is_keepable_hand(self.hand):
+                return
+
+            self.library.extend(self.hand)
+            self.hand = []
+            self.shuffle()
+            self.draw(num_cards=7)
+
+            if self.format == "EDH":
+                n_bottoms = i
+            else:
+                n_bottoms = i + 1
+
+            for _ in range(n_bottoms):
+                self.pitch(exclude=self.DO_NOT_PITCH, destination="bottom_of_library")
+
+            logging.debug("Hand after mulligan %d: \n%s", i + 1, "\n".join(str(card) for card in self.hand))
+
+    def pitch(
+            self,
+            require_nonland=False,
+            require_nonartifact=False,
+            exclude=[],
+            destination="exile"
+        ):
         """Pitch a card from the hand to exile.
 
         e.g. for Chrome Mox, Gemstone Caverns, etc
         
         """
+        if destination not in ["exile", "graveyard", "bottom_of_library"]:
+            raise ValueError(f"Invalid destination: {destination}")
+
         for card in self.hand:
 
             if card.name in exclude:
@@ -115,7 +166,12 @@ class Game:
                 continue
 
             self.hand.remove(card)
-            self.exile.append(card)
+            if destination == "exile":
+                self.exile.append(card)
+            elif destination == "graveyard":
+                self.graveyard.append(card)
+            elif destination == "bottom_of_library":
+                self.library.insert(0, card)
             return card
         raise ValueError("No valid cards to pitch.")
         
@@ -273,7 +329,22 @@ class Game:
             if any(card.name == "Seething Song" for card in self.hand):
                 available_mana["R"] += 2
 
-        # todo: Jeska's Will
+        # _____ Goblin has expected value of ~5 red mana
+        if self._get_available_mana(available_mana, "R") >= 1 and self._get_available_mana(available_mana) >= 3:
+            if any(card.name == "_____ Goblin" for card in self.hand):
+                # todo: pick random sticker sheet
+                available_mana["R"] += 2
+
+        # Jeska's Will has expected value of 4 or 5 red mana
+        if self._get_available_mana(available_mana, "R") >= 1 and self._get_available_mana(available_mana) >= 3:
+            if any(card.name == "Jeska's Will" for card in self.hand):
+                available_mana["R"] += 1
+
+
+        # Would produce R equal to life total divided by 3, rounded down. So approx net gain of life_total//3 - 4, since it costs 3R to cast.
+        if self._get_available_mana(available_mana, "R") >= 1 and self._get_available_mana(available_mana) >= 4:
+            if any(card.name == "Treasonous Ogre" for card in self.hand):
+                available_mana["R"] += self.life_total//3 - 4
 
         return available_mana
 

@@ -223,10 +223,7 @@
         ]
     },
     {
-        "name": "Geth's Grimoire",
-        "tags": [
-            "draw"
-        ]
+        "name": "Gleaming Splendor"
     },
     {
         "name": "Goblin Engineer"
@@ -544,6 +541,9 @@
         "mana_produced": [
             "WG"
         ]
+    },
+    {
+        "name": "World of Seizing"
     },
     {
         "name": "Zirda, the Dawnwaker",
